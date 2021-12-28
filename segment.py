@@ -1,6 +1,9 @@
 import pygame, math
 import pygame_tools as pgt
 
+class Segment: # forward declaration
+    pass
+
 class Segment:
     '''A line segment'''
 
@@ -19,7 +22,7 @@ class Segment:
         self.color = color
         self.width = width
 
-    def follow(self, target: pgt.Point):
+    def follow(self, target: pgt.Point = None):
         '''Move start and end while retaining length'''
         x, y = diff = target - self.start
         self.theta = math.atan2(y, x)
@@ -39,12 +42,6 @@ class Segment:
 
     def draw(self, screen: pygame.Surface):
         '''Draw a segment to the screen'''
-        pygame.draw.circle(
-            screen,
-            'red',
-            self.start,
-            9
-        )
         pygame.draw.line(
             screen,
             self.color,

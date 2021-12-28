@@ -8,32 +8,48 @@ class SegmentSim(pgt.GameScreen):
     BG = pygame.Color('black')
     FG = pygame.Color('white')
 
-    def __init__(self):
+    def __init__(self, number_of_segments: int, segment_length: int, width: int = 3):
+        if number_of_segments < 1:
+            raise ValueError('There cannot be less than 1 segment')
         size = pgt.Point(1400, 750)
         super().__init__(
             pygame.display.set_mode(size),
             size
         )
         pygame.display.set_caption('Segments')
-        self.segments = []
-        self.segments.append(Segment(
+        prev = Segment(
             self.window_size // 2,
-            100,
+            segment_length,
             0,
             self.FG,
-            3
-        ))
+            width
+        )
+        self.segments = [prev]
+        for _ in range(number_of_segments - 1):
+            seg = Segment(
+                prev.end,
+                segment_length,
+                0,
+                self.FG,
+                width
+            )
+            self.segments.append(seg)
 
     def update(self):
         self.screen.fill(self.BG)
+        prev = None
         for seg in self.segments:
-            seg.follow(self.get_scaled_mouse_pos())
+            if prev is None:
+                seg.follow(self.get_scaled_mouse_pos())
+            else:
+                seg.follow(prev.start)
             seg.update()
             seg.draw(self.screen)
+            prev = seg
 
 def main():
     '''Driver code'''
-    SegmentSim().run()
+    SegmentSim(100, 10).run()
 
 if __name__ == '__main__':
     main()
