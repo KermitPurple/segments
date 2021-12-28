@@ -22,7 +22,7 @@ class Segment:
         self.color = color
         self.width = width
 
-    def follow(self, target: pgt.Point = None):
+    def follow(self, target: pgt.Point):
         '''Move start and end while retaining length'''
         x, y = diff = target - self.start
         self.theta = math.atan2(y, x)
