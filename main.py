@@ -60,7 +60,7 @@ class SegmentSim(pgt.GameScreen):
 
 def main():
     '''Driver code'''
-    SegmentSim(100, 10).run()
+    SegmentSim(150, 10).run()
 
 if __name__ == '__main__':
     main()
