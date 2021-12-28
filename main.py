@@ -28,23 +28,15 @@ class SegmentSim(pgt.GameScreen):
             size
         )
         pygame.display.set_caption('Segments')
-        prev = Segment(
-            self.window_size // 2,
-            segment_length,
-            0,
-            self.FGs[0],
-            width
-        )
-        self.segments = [prev]
-        for i in range(number_of_segments - 1):
-            seg = Segment(
-                prev.end,
+        self.segments = []
+        for i in range(number_of_segments):
+            self.segments.append(Segment(
+                self.window_size // 2,
                 segment_length,
                 0,
                 self.FGs[(i + 1) % self.FGs_LEN],
                 width
-            )
-            self.segments.append(seg)
+            ))
 
     def update(self):
         self.screen.fill(self.BG)
