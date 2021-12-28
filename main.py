@@ -8,7 +8,16 @@ class SegmentSim(pgt.GameScreen):
     '''A simulation of segments following the mouse'''
 
     BG = pygame.Color('black')
-    FG = pygame.Color('white')
+    FGs = [
+        'red',
+        'orange',
+        'yellow',
+        'green',
+        'blue',
+        'indigo',
+        'violet'
+    ]
+    FGs_LEN = len(FGs)
 
     def __init__(self, number_of_segments: int, segment_length: int, width: int = 3):
         if number_of_segments < 1:
@@ -23,16 +32,16 @@ class SegmentSim(pgt.GameScreen):
             self.window_size // 2,
             segment_length,
             0,
-            self.FG,
+            self.FGs[0],
             width
         )
         self.segments = [prev]
-        for _ in range(number_of_segments - 1):
+        for i in range(number_of_segments - 1):
             seg = Segment(
                 prev.end,
                 segment_length,
                 0,
-                self.FG,
+                self.FGs[(i + 1) % self.FGs_LEN],
                 width
             )
             self.segments.append(seg)
