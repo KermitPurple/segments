@@ -50,6 +50,10 @@ class SegmentSim(pgt.GameScreen):
             seg.draw(self.screen)
             prev = seg
 
+    def key_down(event: pygame.event.Event):
+        if event.unicode == 'q':
+            exit(0)
+
 def main():
     '''Driver code'''
     SegmentSim(150, 10).run()
